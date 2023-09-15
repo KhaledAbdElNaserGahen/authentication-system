@@ -9,9 +9,13 @@ if(isset($_SESSION['username'])){
 
 
 if(isset($_POST['submit'])){
+
     if($_POST['email'] == '' OR $_POST['password']==''){
+
       echo "<script>alert('some input are empty');</script>";
+
     }else{
+
       $email=$_POST['email'];
       $password=$_POST['password'];
 
@@ -22,8 +26,11 @@ if(isset($_POST['submit'])){
       $data=$login->fetch(PDO::FETCH_ASSOC);
 
       if($login->rowCount()>0){
+
         if(password_verify($password,$data['mypassword'])){
+          
           $_SESSION['username']=$data['username'];
+          $_SESSION['user_id']=$data['id'];
           $_SESSION['email']=$data['email'];
 
           header("location: index.php");
